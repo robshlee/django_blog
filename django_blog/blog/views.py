@@ -14,12 +14,19 @@ def blog_posts(request):
 def about(request):
     return render(request, 'blog/about.html', {'title': 'About'})
 
-class HomePage(TemplateView):
-    template_name = 'blog/home.html'
+class ContactPage(TemplateView):
+    template_name = 'blog/contactpage.html'
 
 class PostListView(ListView):
     model = Post
     template_name = 'blog/blog.html' # <app>/<model>_<viewtype>.html
+    context_object_name = 'posts'
+    ordering = ['-date_posted']
+    paginate_by = 10
+
+class MachineLearningBlogPostListView(ListView):
+    model = Post
+    template_name = 'blog/machine_learning_blog.html' # <app>/<model>_<viewtype>.html
     context_object_name = 'posts'
     ordering = ['-date_posted']
     paginate_by = 10
