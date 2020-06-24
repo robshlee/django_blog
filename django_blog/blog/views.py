@@ -46,11 +46,12 @@ class PostDetailView(DetailView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'content']
+    fields = ['image', 'title', 'category', 'content']
 
     def form_valid(self, form): # overriding form_valid method to make author as the requester before running parent class's form_valid method
         form.instance.author = self.request.user
         return super().form_valid(form)
+
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
