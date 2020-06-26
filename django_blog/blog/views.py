@@ -9,7 +9,7 @@ def blog_posts(request):
     context = {
         'posts': Post.objects.all()
     }
-    return render(request, 'blog/blog.html', context)
+    return render(request, 'blog/home.html', context)
 
 def about(request):
     return render(request, 'blog/about.html', {'title': 'About'})
@@ -19,7 +19,7 @@ class ContactPage(TemplateView):
 
 class PostListView(ListView):
     model = Post
-    template_name = 'blog/blog.html' # <app>/<model>_<viewtype>.html
+    template_name = 'blog/home.html' # <app>/<model>_<viewtype>.html
     context_object_name = 'posts'
     ordering = ['-date_posted']
     paginate_by = 10
@@ -27,19 +27,28 @@ class PostListView(ListView):
 class MachineLearningBlogPostListView(ListView):
     model = Post
     template_name = 'blog/machine_learning_blog.html' # <app>/<model>_<viewtype>.html
-    context_object_name = 'posts'
     ordering = ['-date_posted']
     paginate_by = 10
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['posts'] = Post.objects.filter(category='MACHINE LEARNING')
 
-class UserPostListView(ListView):
+        return context
+
+class RaspberryPiBlogPostListView(ListView):
     model = Post
-    template_name = 'blog/user_posts.html' # <app>/<model>_<viewtype>.html
-    context_object_name = 'posts'
+    template_name = 'blog/raspberry_pi_blog.html' # <app>/<model>_<viewtype>.html
+    ordering = ['-date_posted']
     paginate_by = 10
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['posts'] = Post.objects.filter(category='RASPBERRY PI')
 
-    def get_queryset(self):
-        user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Post.objects.filter(author=user).order_by('-date_posted')
+        return context
+
+    
 
 class PostDetailView(DetailView):
     model = Post

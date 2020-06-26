@@ -166,4 +166,5 @@ if DEBUG:
 
    DEBUG_TOOLBAR_CONFIG = {
        'INTERCEPT_REDIRECTS': False,
+       'SHOW_TEMPLATE_CONTEXT': True,
    }
