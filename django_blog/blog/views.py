@@ -24,6 +24,9 @@ class PostListView(ListView):
     ordering = ['-date_posted']
     paginate_by = 10
 
+class KobePost(TemplateView):
+    template_name = 'blog/kobe_regularization.html'
+
 class MachineLearningBlogPostListView(ListView):
     model = Post
     template_name = 'blog/machine_learning_blog.html' # <app>/<model>_<viewtype>.html

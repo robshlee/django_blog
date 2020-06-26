@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView, ContactPage, \
-    MachineLearningBlogPostListView, RaspberryPiBlogPostListView
+    MachineLearningBlogPostListView, RaspberryPiBlogPostListView, KobePost
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -15,5 +15,6 @@ urlpatterns = [
     path('about/', views.about, name='blog-about'),
     path('contact/', ContactPage.as_view(), name='contact-page'),
     path('machinelearning/', MachineLearningBlogPostListView.as_view(), name='ml-posts'),
-    path('raspberrypi/', RaspberryPiBlogPostListView.as_view(), name='rpi-posts')
+    path('raspberrypi/', RaspberryPiBlogPostListView.as_view(), name='rpi-posts'),
+    path('kobe/', KobePost.as_view(), name='kobe')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
