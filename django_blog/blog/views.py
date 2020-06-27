@@ -29,7 +29,7 @@ class KobePost(TemplateView):
 
 class MachineLearningBlogPostListView(ListView):
     model = Post
-    template_name = 'blog/machine_learning_blog.html' # <app>/<model>_<viewtype>.html
+    template_name = 'blog/blog.html' # <app>/<model>_<viewtype>.html
     ordering = ['-date_posted']
     paginate_by = 10
     
@@ -41,7 +41,7 @@ class MachineLearningBlogPostListView(ListView):
 
 class RaspberryPiBlogPostListView(ListView):
     model = Post
-    template_name = 'blog/raspberry_pi_blog.html' # <app>/<model>_<viewtype>.html
+    template_name = 'blog/blog.html' # <app>/<model>_<viewtype>.html
     ordering = ['-date_posted']
     paginate_by = 10
     

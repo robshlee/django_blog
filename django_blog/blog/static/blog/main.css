@@ -13,7 +13,7 @@ ul {
 }
 
 .bg-steel {
-  background-color: #37c5a1;
+  background-color: #424040;
 }
 
 .site-header .navbar-nav .nav-link {
@@ -90,5 +90,21 @@ a.article-title:hover {
   font-size: 2.5rem;
 }
 
+.dropdown-left-manual {
+  right: 0;
+  left: auto;
+  padding-left: 1px;
+  padding-right: 1px;
+}
+
+.banner {
+  width: 100%;
+  height: 20vh;
+  margin-bottom: 1cm;
+}
 
 
+.banner img {
+  height : 100%;
+  width: 100%;
+}

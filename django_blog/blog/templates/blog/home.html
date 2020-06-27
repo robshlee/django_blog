@@ -1,6 +1,11 @@
 {% extends "blog/base.html" %}
 {% block content %}
 
+
+    <div class="banner no-padding">
+        <img src="/media/nyc_banner.png">
+    </div>
+
     {% for post in posts %}
         <article class="media content-section">
             <img class="rounded-circle article-img" src="{{ post.image.url }}">

@@ -1,5 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
+
+
 <html> 
 <head>
 
@@ -25,7 +27,7 @@
         <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
   
           <div class="container-fluid">
-            <a class="navbar-brand mr-4" href="{% url 'blog-posts' %}">Rob Lee</a>
+            <!-- <a class="navbar-brand mr-4" href="{% url 'blog-posts' %}"><img src="/media/rl_logo.png"></a> -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -35,11 +37,12 @@
               <div class="navbar-nav mr-auto">
   
                 <!--Regular nav-items-->
+                <a class="nav-item nav-link" href="{% url 'blog-posts' %}">Home</a>
                 <div class="navbar-nav dropdown">
                     <a class="nav-item nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog Posts</a>
                     <div class="dropdown-menu" aria-labelledby="adminDropdown">
-                        <a class="dropdown-item text-center" href="{% url 'ml-posts' %}">Machine Learning</a>
-                        <a class="dropdown-item text-center" href="{% url 'rpi-posts' %}">Raspberry Pi</a>
+                        <a class="dropdown-item" href="{% url 'ml-posts' %}">Machine Learning</a>
+                        <a class="dropdown-item" href="{% url 'rpi-posts' %}">Raspberry Pi</a>
                     </div>
                 </div>
 
@@ -68,7 +71,7 @@
   <main role="main" class="container">
       <div class="row">
           
-          <div class="col-md-10">
+          <div class="container-fluid">
           {% if messages %}
               {% for message in messages %}
                   <div class="alert alert-{{ message.tags }}">
@@ -76,6 +79,7 @@
                   </div>
               {% endfor %}
           {% endif %}
+
           {% block content %}{% endblock %}
           </div>
 
