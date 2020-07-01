@@ -5,7 +5,7 @@ from django.urls import reverse
 
 blog_categories = (
     ('MACHINE LEARNING', 'Machine Learning'),
-    ('RASPBERRY PI', 'Raspberry Pi'),
+    ('DJANGO', 'Django'),
 )
 
 class Post(models.Model):

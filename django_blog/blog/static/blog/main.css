@@ -13,20 +13,21 @@ ul {
 }
 
 .bg-steel {
-  background-color: #424040;
+  background-color: #fafafa;
 }
 
 .site-header .navbar-nav .nav-link {
-  color: #ffffff;
+  color: #333333;
 }
 
 .site-header .navbar-nav .nav-link:hover {
-  color: #ffffff;
+  color: #333333;
 }
 
 .site-header .navbar-nav .nav-link.active {
   font-weight: 500;
 }
+
 
 .content-section {
   background: #ffffff;
@@ -107,4 +108,36 @@ a.article-title:hover {
 .banner img {
   height : 100%;
   width: 100%;
+}
+
+.navbar-a {
+  font-size: 1.5em;
+  display: inline-block;
+  margin: 8px;
+
+}
+
+.bold-a {
+  font-weight:bold;
+}
+
+.bottom-border-line {
+  border-bottom:1px solid #dfdfdf;
+}
+
+.img-circle {
+  height: 100px;
+  width: 100px;
+  margin-right: 16px;
+  margin-left: 80px;
+  margin-bottom: 16px;
+}
+
+.profile-pad {
+  margin-left: 50px;
+}
+
+.profile-icon {
+  width: 20px;
+  height: 20px;
 }

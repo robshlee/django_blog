@@ -17,6 +17,9 @@ def about(request):
 class ContactPage(TemplateView):
     template_name = 'blog/contactpage.html'
 
+class ReadingList(TemplateView):
+    template_name = 'blog/reading_list.html'
+
 class PostListView(ListView):
     model = Post
     template_name = 'blog/home.html' # <app>/<model>_<viewtype>.html
@@ -39,7 +42,7 @@ class MachineLearningBlogPostListView(ListView):
 
         return context
 
-class RaspberryPiBlogPostListView(ListView):
+class DjangoBlogPostListView(ListView):
     model = Post
     template_name = 'blog/blog.html' # <app>/<model>_<viewtype>.html
     ordering = ['-date_posted']
@@ -47,11 +50,9 @@ class RaspberryPiBlogPostListView(ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['posts'] = Post.objects.filter(category='RASPBERRY PI')
+        context['posts'] = Post.objects.filter(category='DJANGO')
 
         return context
-
-    
 
 class PostDetailView(DetailView):
     model = Post
@@ -63,7 +64,6 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form): # overriding form_valid method to make author as the requester before running parent class's form_valid method
         form.instance.author = self.request.user
         return super().form_valid(form)
-
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
