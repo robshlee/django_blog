@@ -8,6 +8,12 @@ blog_categories = (
     ('DJANGO', 'Django'),
 )
 
+read_choices = (
+    ('READ', 'Read'),
+    ('TO_READ', 'To Read'),
+    ('READING', 'Reading')
+)
+
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
@@ -21,3 +27,16 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk': self.pk})
+
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+    subtitle = models.CharField(max_length=100)
+    author = models.CharField(max_length=100)
+    read_stage = models.CharField(choices=read_choices, max_length=100)
+    comment = models.TextField()
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('book-detail', kwargs={'pk': self.pk})
