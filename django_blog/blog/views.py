@@ -113,4 +113,4 @@ class BookUpdateView(LoginRequiredMixin, UpdateView):
 
 class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Book
-    success_url = reverse('book-detail')
+    success_url = '/'
