@@ -39,8 +39,8 @@ RUN pip3 install -e git+http://github.com/larserikgk/django-storages.git#egg=dja
 COPY . /usr/src/drax/
 
 COPY entrypoint.sh /usr/src/django_blog
-#ENTRYPOINT ["python", "manage.py", "runserver", "0.0.0.0:1337"]
+# ENTRYPOINT ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
-ENTRYPOINT ["chmod", "+x", "./entrypoint.sh"]
+# ENTRYPOINT ["./entrypoint.sh"]
 
 # "chmod", "+x", 

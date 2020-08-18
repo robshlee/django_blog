@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  web:
+    build: 
+      context: ./django_blog
+      dockerfile: Dockerfile
+    expose:
+      - 80
+    volumes:
+      - static_volume:/usr/src/django_blog/staticfiles
+    #   - DJANGO_SETTINGS_MODULE=django_blog.settings
+    ports:
+      - 80:80
+    environment:
+      - DEBUG=true
+  nginx:
+    build: ./nginx
+    volumes:
+      - static_volume:/usr/src/django_blog/staticfiles
+    ports:
+      - 1337:80
+    depends_on:
+      - web
+    command: /entrypoint.sh
+
+volumes:
+  static_volume:
