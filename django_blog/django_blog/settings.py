@@ -20,12 +20,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 't(s2*7n&!m059gaup4+oa%6jf+39#5twu@*s@6+9(4xwqch2+^'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'changeme')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(int(os.environ.get('DEBUG', 0)))
 
 ALLOWED_HOSTS = []
+ALLOWED_HOSTS_ENV = os.environ.get('ALLOWED_HOSTS')
+if ALLOWED_HOSTS_ENV:
+    ALLOWED_HOSTS.extend(ALLOWED_HOSTS_ENV.split(','))
 
 
 # Application definition
@@ -120,10 +123,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_ROOT = '/vol/web/static'
+STATIC_URL = '/static/static'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # directory where uploaded files are saved
-MEDIA_URL = '/media/' # how we're going to access media in browser
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # directory where uploaded files are saved
+MEDIA_ROOT = 'vol/web/media'
+MEDIA_URL = '/static/media/' # how we're going to access media in browser
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
