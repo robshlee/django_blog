@@ -1,23 +1,31 @@
-version: '3.7'
+version: '3'
 
 services:
-    web:
-        build:
-            context: .
-        volumes:
-            - static_data:/vol/web
-        environment:
-            - SECRET_KEY=samplesecretkey123
-            - ALLOWED_HOSTS=127.0.0.1,localhost
-    proxy:
-        build:
-            context: ./proxy
-        volumes:
-            - static_data:/vol/static
-        ports:
-            - "8080:8080"
-        depends_on:
-            - web
+  web:
+    build: 
+      context: ./django_blog
+      dockerfile: Dockerfile
+    expose:
+      - 80
+    volumes:
+      - static_volume:/usr/src/django_blog/staticfiles
+      - media_volume:/usr/src/django_blog/media_b
+    ports:
+      - 80:80
+    environment:
+      - DEBUG=false
+      - DJANGO_SETTINGS_MODULE=django_blog.settings
+  nginx:
+    build: ./nginx
+    volumes:
+      - static_volume:/usr/src/django_blog/staticfiles
+      - media_volume:/usr/src/django_blog/media
+
+    ports:
+      - 1337:80
+    depends_on:
+      - web
 
 volumes:
-    static_data:
+    static_volume:
+    media_volume:

@@ -22,14 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', 'changeme')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(int(os.environ.get('DEBUG', 0)))
-
-ALLOWED_HOSTS = []
-ALLOWED_HOSTS_ENV = os.environ.get('ALLOWED_HOSTS')
-if ALLOWED_HOSTS_ENV:
-    ALLOWED_HOSTS.extend(ALLOWED_HOSTS_ENV.split(','))
-
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -123,12 +116,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_ROOT = '/vol/web/static'
-STATIC_URL = '/static/static'
+STATIC_URL = '/staticfiles/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # directory where uploaded files are saved
-MEDIA_ROOT = 'vol/web/media'
-MEDIA_URL = '/static/media/' # how we're going to access media in browser
+MEDIA_URL = '/media/' # how we're going to access media in browser
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # directory where uploaded files are saved
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -142,34 +134,42 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
 
-DEBUG = True
+#check to see if debug mode
+
+try:
+    if os.environ['DEBUG'] == 'true':
+        DEBUG = 1
+    else:
+        DEBUG = 0
+except:
+    DEBUG = 1
 
 if DEBUG:
-   INTERNAL_IPS = ('127.0.0.1', 'localhost',)
-   MIDDLEWARE += (
-       'debug_toolbar.middleware.DebugToolbarMiddleware',
-   )
+    INTERNAL_IPS = ('127.0.0.1', 'localhost',)
+    MIDDLEWARE += (
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    )
 
-   INSTALLED_APPS += (
-       'debug_toolbar',
-   )
+    INSTALLED_APPS += (
+        'debug_toolbar',
+    )
 
-   DEBUG_TOOLBAR_PANELS = [
-       'debug_toolbar.panels.versions.VersionsPanel',
-       'debug_toolbar.panels.timer.TimerPanel',
-       'debug_toolbar.panels.settings.SettingsPanel',
-       'debug_toolbar.panels.headers.HeadersPanel',
-       'debug_toolbar.panels.request.RequestPanel',
-       'debug_toolbar.panels.sql.SQLPanel',
-       'debug_toolbar.panels.staticfiles.StaticFilesPanel',
-       'debug_toolbar.panels.templates.TemplatesPanel',
-       'debug_toolbar.panels.cache.CachePanel',
-       'debug_toolbar.panels.signals.SignalsPanel',
-       'debug_toolbar.panels.logging.LoggingPanel',
-       'debug_toolbar.panels.redirects.RedirectsPanel',
-   ]
+    DEBUG_TOOLBAR_PANELS = [
+        'debug_toolbar.panels.versions.VersionsPanel',
+        'debug_toolbar.panels.timer.TimerPanel',
+        'debug_toolbar.panels.settings.SettingsPanel',
+        'debug_toolbar.panels.headers.HeadersPanel',
+        'debug_toolbar.panels.request.RequestPanel',
+        'debug_toolbar.panels.sql.SQLPanel',
+        'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+        'debug_toolbar.panels.templates.TemplatesPanel',
+        'debug_toolbar.panels.cache.CachePanel',
+        'debug_toolbar.panels.signals.SignalsPanel',
+        'debug_toolbar.panels.logging.LoggingPanel',
+        'debug_toolbar.panels.redirects.RedirectsPanel',
+    ]
 
-   DEBUG_TOOLBAR_CONFIG = {
-       'INTERCEPT_REDIRECTS': False,
-       'SHOW_TEMPLATE_CONTEXT': True,
-   }
+    DEBUG_TOOLBAR_CONFIG = {
+        'INTERCEPT_REDIRECTS': False,
+        'SHOW_TEMPLATE_CONTEXT': True,
+    }
