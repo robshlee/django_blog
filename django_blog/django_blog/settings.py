@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', 'changeme')
 
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost', '18.219.196.35']
 
 # Application definition
 
@@ -134,8 +134,16 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
 
-#check to see if debug mode
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 
+AWS_S3_FILE_OVERWRITE = False #makes sure files aren't being overwritten when uploaded
+AWS_DEFAULT_ACL = None
+
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+#check to see if debug mode
 try:
     if os.environ['DEBUG'] == 'true':
         DEBUG = 1
@@ -145,7 +153,7 @@ except:
     DEBUG = 1
 
 if DEBUG:
-    INTERNAL_IPS = ('127.0.0.1', 'localhost',)
+    INTERNAL_IPS = ('127.0.0.1', 'localhost','18.219.196.35')
     MIDDLEWARE += (
         'debug_toolbar.middleware.DebugToolbarMiddleware',
     )
