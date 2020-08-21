@@ -1,9 +1,10 @@
 {% extends "blog/base.html" %}
+{% load static %}
 {% block content %}
     <br>
 
     <article class="media content-section">
-        <img class="resume-style" src="/media/resume.jpg">
+        <img class="resume-style" src="{% static '/media/resume.jpg' %}">
     </article>
 {% endblock content %}
 

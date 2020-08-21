@@ -1,4 +1,5 @@
 {% extends "blog/base.html" %}
+{% load static %}
 {% block content %}
     <br>
     <article class="content-section">
@@ -7,7 +8,7 @@
             <large>About</large>
         </div>
         <p class="article-content">
-            <img src="/media/profile_pics/pumpkin_patch.JPG" align="left" hspace="50" vspace="50" style="width:20%;">
+            <img src="{% static '/media/profile_pics/pumpkin_patch.JPG' %}" align="left" hspace="50" vspace="50" style="width:20%;">
             Hey there. My name is Rob Lee and I'm a Product Manager, Developer, and Machine Learning enthusiast.
 
             My background is in Industrial Engineering and I've worked 4 years in Operations Management before making my switch to software development and machine learning. For the past 2 years I've worked as a professional developer.
