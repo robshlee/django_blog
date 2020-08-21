@@ -9,9 +9,9 @@ services:
       - 80
     volumes:
       - static_volume:/usr/src/django_blog/staticfiles
-      - media_volume:/usr/src/django_blog/media_b
+      - media_volume:/usr/src/django_blog/media
     ports:
-      - 80:80
+      - 90:80
     environment:
       - DEBUG=false
       - DJANGO_SETTINGS_MODULE=django_blog.settings
@@ -22,7 +22,7 @@ services:
       - media_volume:/usr/src/django_blog/media
 
     ports:
-      - 1337:80
+      - 80:80
     depends_on:
       - web
 

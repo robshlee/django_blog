@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', 'changeme')
 
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost', '18.219.196.35', 'ec2-18-219-196-35.us-east-2.compute.amazonaws.com', 'robshlee.com', 'www.robshlee.com']
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost', '18.219.196.35', 'ec2-18-219-196-35.us-east-2.compute.amazonaws.com', 'robshlee.com']
 
 # Application definition
 
@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'media.apps.MediaConfig',
     'django.contrib.staticfiles',
     'storages'
 ]
@@ -145,17 +144,12 @@ AWS_S3_OBJECT_PARAMETERS = {
 AWS_LOCATION = 'static'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/' # how we're going to access media in browser
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # directory where uploaded files are saved
-
-
 
 
 #check to see if debug mode
@@ -165,7 +159,7 @@ try:
     else:
         DEBUG = 0
 except:
-    DEBUG = 1
+    DEBUG = 0
 
 if DEBUG:
     INTERNAL_IPS = ('127.0.0.1', 'localhost',)
