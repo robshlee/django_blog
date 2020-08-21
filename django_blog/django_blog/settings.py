@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', 'changeme')
 
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost', '18.219.196.35']
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost', '18.219.196.35', 'ec2-18-219-196-35.us-east-2.compute.amazonaws.com', 'robshlee.com', 'www.robshlee.com']
 
 # Application definition
 
@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'media.apps.MediaConfig',
     'django.contrib.staticfiles',
 ]
 
@@ -134,6 +135,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
 
+# S3 config
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
