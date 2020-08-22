@@ -15,9 +15,6 @@ services:
     environment:
       - DEBUG=1
       - DJANGO_SETTINGS_MODULE=django_blog.settings
-      - AWS_ACCESS_KEY_ID=AKIA45PVXHKK2WV4RBIH
-      - AWS_SECRET_ACCESS_KEY=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
-      - AWS_STORAGE_BUCKET_NAME=robshlee-blog-files
 
   nginx:
     build: ./nginx
