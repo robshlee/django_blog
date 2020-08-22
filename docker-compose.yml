@@ -1,13 +1,35 @@
-version: '3'
+version: '3.2'
 
 services:
   web:
     build: 
       context: ./django_blog
+      dockerfile: Dockerfile
+    expose:
+      - 80
     volumes:
-      - ./django_blog:/django_blog
+      - static_volume:/usr/src/django_blog/staticfiles
+      - media_volume:/usr/src/django_blog/media_b
     ports:
-      - 8000:8000
-    command: sh -c "python manage.py runserver 0.0.0.0:1337"
+      - 80:80
     environment:
       - DEBUG=1
+      - DJANGO_SETTINGS_MODULE=django_blog.settings
+      - AWS_ACCESS_KEY_ID=AKIA45PVXHKK2WV4RBIH
+      - AWS_SECRET_ACCESS_KEY=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
+      - AWS_STORAGE_BUCKET_NAME=robshlee-blog-files
+
+  nginx:
+    build: ./nginx
+    volumes:
+      - static_volume:/usr/src/django_blog/staticfiles
+      - media_volume:/usr/src/django_blog/media
+
+    ports:
+      - 1337:80
+    depends_on:
+      - web
+
+volumes:
+    static_volume:
+    media_volume:
