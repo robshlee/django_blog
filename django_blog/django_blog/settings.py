@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,7 +20,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', 'changeme')
 
 ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost', '18.219.196.35', 'ec2-18-219-196-35.us-east-2.compute.amazonaws.com', 'robshlee.com', 'www.robshlee.com']
@@ -160,7 +160,7 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 #check to see if debug mode
 try:
-    if os.environ['DEBUG'] == 1:
+    if config('DEBUG') == 1:
         DEBUG = 1
     else:
         DEBUG = 0
@@ -168,7 +168,7 @@ except:
     DEBUG = 1
 
 if DEBUG:
-    INTERNAL_IPS = ('127.0.0.1', 'localhost','18.219.196.35')
+    INTERNAL_IPS = ('127.0.0.1', 'localhost')
     MIDDLEWARE += (
         'debug_toolbar.middleware.DebugToolbarMiddleware',
     )
