@@ -28,6 +28,7 @@ RUN pip3 install
 # set working directory
 WORKDIR /usr/src/django_blog
 
+# set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
