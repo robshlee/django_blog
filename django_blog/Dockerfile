@@ -1,3 +1,7 @@
+ARG AWS_ACCESS_KEY_ID
+ARG AWS_SECRET_ACCESS_KEY
+ARG AWS_STORAGE_BUCKET_NAME
+
 FROM ubuntu:18.04
 
 # install dependencies
@@ -28,8 +32,13 @@ RUN pip3 install
 # set working directory
 WORKDIR /usr/src/django_blog
 
+# set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+
+ENV AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+ENV AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+ENV AWS_STORAGE_BUCKET_NAME=$AWS_STORAGE_BUCKET_NAME
 
 COPY requirements/base.txt /usr/src/django_blog
 COPY requirements/prod.txt /usr/src/django_blog
@@ -38,6 +47,9 @@ RUN pip3 install -r prod.txt
 RUN pip3 install -e git+http://github.com/larserikgk/django-storages.git#egg=django-storages
 
 COPY . /usr/src/django_blog/
+
+
+
 
 #ENTRYPOINT ["python", "manage.py", "runserver", "0.0.0.0:1337"]
 

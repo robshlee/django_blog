@@ -13,8 +13,10 @@ services:
     ports:
       - 90:80
     environment:
-      - DEBUG=1
       - DJANGO_SETTINGS_MODULE=django_blog.settings
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_STORAGE_BUCKET_NAME=${AWS_STORAGE_BUCKET_NAME}
 
   nginx:
     build: ./nginx
